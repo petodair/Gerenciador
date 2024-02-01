@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=width-device, initial-scale=1.0">
+	<meta name="author" content="Peterson Odair">
+	<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+	<title>Encontrar Produtos</title>
+</head>
+
+<body>
+	<div th:replace="~{fragmentos/fragmentos :: cabecalho}"></div>
+
+	<div class="container" style="margin-top: 50px; margin-bottom: 20px;">
+		
+        <br>
+		<h4>Encontrar Produtos</h4>
+		<hr>
+		<br>
+		
+		<form method="post" action="pesquisarProduto" th:object="${produto}">
+			
+			<div class="input-group col-6 offset-3">
+				
+				<input class="form-control" placeholder="Busque o nome do produto..." th:field="*{nome}">
+				
+				<div class="input-group-append">
+					<button type="submit" class="btn btn-outline-secondary">Pesquisar</button>
+				</div>
+				
+				
+			</div>
+			
+		</form>
+		
+		<br>
+		
+		<hr>
+
+		<div class="row">
+			<div class="card" style="width: 288px;">
+				<img class="card-img-top" th:href="@{/produtosBovinos}" src="img/bovinos.png">
+				<div class="card-body">
+					<h5 class="card-title">Carnes Bovinas</h5>
+					<p class="card-text">Busque por todas as carnes classificadas como bovinas.</p>
+					<a th:href="@{/produtosBovinos}" class="btn btn-outline-primary">Clique Aqui!</a>
+				</div>
+			</div>
+
+			<div class="card ml-3" style="width: 288px;">
+				<img class="card-img-top" th:href="@{/produtosSuinos}" src="img/suinos.jpg">
+				<div class="card-body">
+					<h5 class="card-title">Carnes Suínas</h5>
+					<p class="card-text">Busque por todas as carnes classificadas como suínas.</p>
+					<a th:href="@{/produtosSuinos}" class="btn btn-outline-primary">Clique Aqui!</a>
+				</div>
+			</div>
+
+			<div class="card ml-3" style="width: 288px;">
+				<img class="card-img-top" th:href="@{/produtosFrangos}" src="img/frangos.jpg">
+				<div class="card-body">
+					<h5 class="card-title">Carnes de Frango</h5>
+					<p class="card-text">Busque por todas as carnes de frango.</p>
+					<a th:href="@{/produtosFrangos}" class="btn btn-outline-primary">Clique Aqui!</a>
+				</div>
+			</div>
+
+			<div class="card mt-3" style="width: 288px;">
+				<img class="card-img-top" th:href="@{/produtosVacuo}" src="img/vacuo.jpg">
+				<div class="card-body">
+					<h5 class="card-title">Carnes a Vácuo</h5>
+					<p class="card-text">Busque por todas as carnes a vácuo.</p>
+					<a th:href="@{/produtosVacuo}" class="btn btn-outline-primary">Clique Aqui!</a>
+				</div>
+			</div>
+			
+			<div class="card mt-3 ml-3" th:href="@{/produtosCongelados}" style="width: 288px;">
+				<img class="card-img-top" src="img/congelados.png">
+				<div class="card-body">
+					<h5 class="card-title">Carnes Congeladas</h5>
+					<p class="card-text">Busque por todas as carnes congeladas.</p>
+					<a th:href="@{/produtosCongelados}" class="btn btn-outline-primary">Clique Aqui!</a>
+				</div>
+			</div>
+
+		</div>
+
+
+	</div>
+
+
+
+	</div>
+
+	<div th:replace="~{fragmentos/fragmentos :: rodape}"></div>
+
+	<!-- JQuery e Bootstrap -->
+	<script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
+	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>

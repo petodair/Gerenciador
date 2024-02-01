@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=width-device, initial-scale=1.0">
+	<meta name="author" content="Peterson Odair">
+	<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+	<title>Produtos Bovinos</title>
+</head>
+
+<body>
+	<div th:replace="~{fragmentos/fragmentos :: cabecalho}"></div>
+	
+	<div class="container">
+		
+		<br>
+		<h3>Produtos Bovinos</h3>
+		<hr>
+		<a class="btn btn-primary" th:href="@{gerarRelatorio/{tipo}(tipo='BOVINO')}">Gerar Relatório</a>
+		
+		<table class="table table-bordered table-hover">
+			
+			<thead>
+				<th scope="col">Nome</th>
+				<th scope="col">Codigo</th>
+				<th scope="col">Data</th>
+				<th scope="col">Quantidade</th>
+				<th scope="col">Unidade</th>
+				<th scope="col">Tipo</th>
+				<th scope="col">Ação</th>
+				
+			</thead>
+			<tbody>
+				<tr scope="row" th:each="produtos : ${produtosBovinos}">
+					
+					<td th:text="${produtos.nome}"></td>
+					<td th:text="${produtos.codigo}"></td>
+					<td th:text="${produtos.data}"></td>
+					<td th:text="${produtos.quantidade}"></td>
+					<td th:text="${produtos.unidade}"></td>
+					<td th:text="${produtos.tipo}"></td>
+					
+					<td>
+						
+						<a class="btn btn-primary" th:href="@{alterar/{id}(id=${produtos.id})}">Editar</a>
+						<a class="btn btn-danger" th:href="@{excluir/{id}(id=${produtos.id})}">Excluir</a>
+						
+					</td>
+					
+				</tr>
+			</tbody>
+			
+		</table>
+	</div>
+
+</body>
+</html>

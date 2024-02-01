@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=width-device, initial-scale=1.0">
+	<meta name="author" content="Peterson Odair">
+	<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<title>Gerenciador de Dados</title>
+</head>
+
+<body>
+	
+	<!-- Cabeçalho -->
+	<header th:fragment="cabecalho">
+
+		<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #4527A0;">
+			<a class="navbar-brand" th:href="@{/}">
+				<h3 style="color: rgb(128, 128, 255);">Gerenciador</h3>
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navMobile">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div id="navMobile" class="navbar-collapse collapse justify-content-end">
+
+				<a class="btn-nav nav-item nav-link" th:href="@{/}">Home</a>		
+				<a class="btn-nav nav-item nav-link" th:href="@{/inserirProduto}">Cadastrar Produto</a>
+				<a data-toggle="modal" data-target="#modalPesquisa"  class="btn-nav nav-item nav-link">Pesquisar Produto</a>
+				<a class="btn-nav nav-item nav-link btn-danger">Sair</a>
+
+			</div>
+		</nav>
+
+	</header>
+	
+	<!-- Rodape -->
+	<footer  th:fragment="rodape">
+		<div class="rodape">
+			<span>Todos os Direteitos Reservados - 2024 &copy; Peterson Odair Souza Batista</span>
+		</div>
+	</footer>
+
+<!-- JQuery e Bootstrap -->
+	<script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
+	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+
+</body>
+</html>

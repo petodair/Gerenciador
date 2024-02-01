@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=width-device, initial-scale=1.0">
+	<meta name="author" content="Peterson Odair">
+	<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+	<title>Inserir Produto</title>
+</head>
+
+<body>
+	<div th:replace="~{fragmentos/fragmentos :: cabecalho}"></div>
+
+	<div class="container" style="margin-top: 50px; margin-bottom: 20px;">
+
+		<h4>+ Inserir Produto</h4>
+		<hr>
+
+		<form method="post" action="/insertProduto" th:object="${produto}">
+
+			<div class="row">
+				<div class="col-md-6 form-grop offset-md-3">
+					<div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('nome')}">
+						<label class="validation-message" th:errors="*{nome}"></label>
+					</div>
+					<label>Nome do Produto:</label>
+					<input class="form-control" placeholder="Ex: Bife de Patinho" th:field="*{nome}">
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-6 form-grop offset-md-3">
+					<div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('codigo')}">
+						<label class="validation-message" th:errors="*{codigo}"></label>
+					</div>
+					<label>Codigo:</label>
+					<input type="number" class="form-control" placeholder="Ex: 24536" th:field="*{codigo}">
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-6 form-grop offset-md-3">
+					<label>Data:</label>
+					<input type="date" class="form-control" th:field="*{data}">
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-6 form-grop offset-md-3">
+					<label>Quantidade:</label>
+					<input type="number" class="form-control" placeholder="Ex: 2.000" th:field="*{quantidade}">
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-6 form-grop offset-md-3">
+					<label>Unidades:</label>
+					<input type="number" step="1" pattern="\d+" class="form-control" th:field="*{unidade}">
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-6 form-grop offset-md-3">
+					<label>Selecione o Tipo:</label>
+					<select class="form-control" th:field="*{tipo}">
+
+						<option th:each="tipo : ${T(br.com.gerenciadados.enums.Tipo).values()}" th:value="${tipo}"
+							th:text="${tipo}"></option>
+
+					</select>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-6 form-grop offset-md-3">
+					<label>Observação:</label>
+					<input type="text" class="form-control" th:field="*{obs}">
+				</div>
+			</div>
+
+			<br>
+
+			<div class="row">
+				<button type="submit" class="btn btn-success offset-md-5">SALVAR</button>
+				<!--Espaçamento-->&nbsp;&nbsp;&nbsp;&nbsp;
+				<a class="btn btn-outline-danger">VOLTAR</a>
+			</div>
+
+		</form>
+
+	</div>
+
+	<div th:replace="~{fragmentos/fragmentos :: rodape}"></div>
+
+	<!-- JQuery e Bootstrap -->
+	<script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
+	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
