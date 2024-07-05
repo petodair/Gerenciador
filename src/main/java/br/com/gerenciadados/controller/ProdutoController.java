@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,10 +47,12 @@ public class ProdutoController {
 		if (br.hasErrors()) {
 			mv.setViewName("produto/formProduto");
 			mv.addObject("produto");
+			List<String> errors = br.getAllErrors().stream().map(e -> e.getDefaultMessage()).collect(Collectors.toList());
+			System.out.println(produto.getValidade());
+			System.out.println(errors);
+			
 		} else {
 			mv.setViewName("redirect:/listaDeProdutos");
-			String data = produto.getData();
-			produto.setData(converterData(data));
 			produtoRepositorio.save(produto);
 		}
 		return mv;
@@ -175,9 +178,9 @@ public class ProdutoController {
 			
 			PdfPCell col1 = new PdfPCell(new Paragraph("Nome"));
 			PdfPCell col2 = new PdfPCell(new Paragraph("Código"));
-			PdfPCell col3 = new PdfPCell(new Paragraph("Data"));
-			PdfPCell col4 = new PdfPCell(new Paragraph("Quantidade"));
-			PdfPCell col5 = new PdfPCell(new Paragraph("Unidade"));
+			PdfPCell col3 = new PdfPCell(new Paragraph("Fabricação"));
+			PdfPCell col4 = new PdfPCell(new Paragraph("Validade"));
+			PdfPCell col5 = new PdfPCell(new Paragraph("Quantidade"));
 			PdfPCell col6 = new PdfPCell(new Paragraph("Tipo"));
 			
 			tabela.addCell(col1);
@@ -191,9 +194,9 @@ public class ProdutoController {
 			for (int i = 0; i < lista.size(); i++) {
 				tabela.addCell(lista.get(i).getNome());
 				tabela.addCell(lista.get(i).getCodigo());
-				tabela.addCell(lista.get(i).getData());
+				tabela.addCell(converterDataParaString(lista.get(i).getFabricacao()));
+				tabela.addCell(converterDataParaString(lista.get(i).getValidade()));
 				tabela.addCell(Double.toString(lista.get(i).getQuantidade()));
-				tabela.addCell(Integer.toString(lista.get(i).getUnidade()));
 				tabela.addCell(lista.get(i).getTipo().toString());
 			}
 			documento.add(tabela);
@@ -234,9 +237,9 @@ public class ProdutoController {
 			
 			PdfPCell col1 = new PdfPCell(new Paragraph("Nome"));
 			PdfPCell col2 = new PdfPCell(new Paragraph("Código"));
-			PdfPCell col3 = new PdfPCell(new Paragraph("Data"));
-			PdfPCell col4 = new PdfPCell(new Paragraph("Quantidade"));
-			PdfPCell col5 = new PdfPCell(new Paragraph("Unidade"));
+			PdfPCell col3 = new PdfPCell(new Paragraph("Fabrição"));
+			PdfPCell col4 = new PdfPCell(new Paragraph("Validade"));
+			PdfPCell col5 = new PdfPCell(new Paragraph("Quantidade"));
 			PdfPCell col6 = new PdfPCell(new Paragraph("Tipo"));
 			
 			tabela.addCell(col1);
@@ -250,9 +253,9 @@ public class ProdutoController {
 			for (int i = 0; i < lista.size(); i++) {
 				tabela.addCell(lista.get(i).getNome());
 				tabela.addCell(lista.get(i).getCodigo());
-				tabela.addCell(lista.get(i).getData());
+				tabela.addCell(converterDataParaString(lista.get(i).getFabricacao()));
+				tabela.addCell(converterDataParaString(lista.get(i).getValidade()));
 				tabela.addCell(Double.toString(lista.get(i).getQuantidade()));
-				tabela.addCell(Integer.toString(lista.get(i).getUnidade()));
 				tabela.addCell(lista.get(i).getTipo().toString());
 			}
 			documento.add(tabela);
@@ -264,39 +267,15 @@ public class ProdutoController {
 		return mv;
 	}
 
-	public String converterData(String data) {
+	public String converterDataParaString(Date data) {
 
-		try {
-			DateFormat formatUS = new SimpleDateFormat("yyyy-MM-dd");
-			Date date = formatUS.parse(data);
+		DateFormat formatBR = new SimpleDateFormat("dd-MM-yyyy");
+		String dataConvertida = formatBR.format(data);
 
-			DateFormat formatBR = new SimpleDateFormat("dd-MM-yyyy");
-			String dataConvertida = formatBR.format(date);
-
-			return dataConvertida;
-
-		} catch (ParseException e) {
-			e.printStackTrace();
-			return "Erro na data";
-		}
+		return dataConvertida;
 	}
 
-	public String desconverterData(String data) {
-
-		try {
-			DateFormat formatBR = new SimpleDateFormat("dd-MM-yyyy");
-			Date date = formatBR.parse(data);
-
-			DateFormat formatUS = new SimpleDateFormat("yyyy-MM-dd");
-			String dataConvertida = formatUS.format(date);
-
-			return dataConvertida;
-
-		} catch (ParseException e) {
-			e.printStackTrace();
-			return "Erro na data";
-		}
-	}
+	
 	
 	public List<Produto> selecionarLista(String tipo) {
 		if(tipo.equals("VACUO")) {

@@ -38,25 +38,26 @@
 					<input type="number" class="form-control" placeholder="Ex: 24536" th:field="*{codigo}">
 				</div>
 			</div>
+			
+			<div class="row">
+				<div class="col-md-6 form-grop offset-md-3">
+					<label>Fabricação:</label>
+					<input type="date" class="form-control" th:field="*{fabricacao}">
+				</div>
+			</div>
 
 			<div class="row">
 				<div class="col-md-6 form-grop offset-md-3">
-					<label>Data:</label>
-					<input type="date" class="form-control" th:field="*{data}">
+					<label>Validade:</label>
+					<input type="date" class="form-control" th:field="*{validade}">
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="col-md-6 form-grop offset-md-3">
 					<label>Quantidade:</label>
-					<input type="number" class="form-control" placeholder="Ex: 2.000" th:field="*{quantidade}">
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-md-6 form-grop offset-md-3">
-					<label>Unidades:</label>
-					<input type="number" step="1" pattern="\d+" class="form-control" th:field="*{unidade}">
+					<input type="number" class="form-control" placeholder="Quantidade" th:field="*{quantidade}"
+					step="any">
 				</div>
 			</div>
 

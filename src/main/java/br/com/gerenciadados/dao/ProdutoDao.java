@@ -11,10 +11,10 @@ public interface ProdutoDao extends JpaRepository<Produto, Integer> {
 	
 	public List<Produto> findByNomeContainingIgnoreCase(String nome);
 	
-	@Query("select j from Produto j where j.codigo = ?1")
+	@Query("select j from Produto j where j.codigo = :codigo")
 	public List<Produto> findByCodigo(String codigo);
 	
-	@Query("select j from Produto j where j.tipo = 'VACUO'")
+	@Query("select j from Produto j where j.tipo = 'VACUO' order by validade asc")
 	public List<Produto> findByTipoVacuo();
 	
 	@Query("select j from Produto j where j.tipo = 'BOVINO' or j.tipo = 'VACUO'")

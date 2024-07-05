@@ -2,6 +2,10 @@ package br.com.gerenciadados.model;
 
 
 
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import br.com.gerenciadados.enums.Tipo;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,8 +14,9 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Produto {
@@ -29,13 +34,15 @@ public class Produto {
 	private String codigo;
 	
 	@Column
-	private String data;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date fabricacao;
+	
+	@Column
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date validade;
 	
 	@Column
 	private double quantidade;
-	
-	@Column
-	private int unidade;
 	
 	@Column
 	@Enumerated(EnumType.STRING)
@@ -68,12 +75,20 @@ public class Produto {
 		this.codigo = codigo;
 	}
 
-	public String getData() {
-		return data;
+	public Date getValidade() {
+		return validade;
 	}
 
-	public void setData(String data) {
-		this.data = data;
+	public void setValidade(Date validade) {
+		this.validade = validade;
+	}
+
+	public Date getFabricacao() {
+		return fabricacao;
+	}
+
+	public void setFabricacao(Date fabricacao) {
+		this.fabricacao = fabricacao;
 	}
 
 	public double getQuantidade() {
@@ -83,15 +98,6 @@ public class Produto {
 	public void setQuantidade(double quantidade) {
 		this.quantidade = quantidade;
 	}
-
-	public int getUnidade() {
-		return unidade;
-	}
-
-	public void setUnidade(int unidade) {
-		this.unidade = unidade;
-	}
-	
 	
 
 	public Tipo getTipo() {
